@@ -52,7 +52,7 @@
       <Project>{03cc4e99-5ece-4ccb-86d4-325fb0b2ab87}</Project>
       <Name>ClayApplication.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\ClayApplaication.DataAccess.csproj">
+    <ProjectReference Include="..\ClayApplication.DataAccess\ClayApplaication.DataAccess.csproj">
       <Project>{64e509c2-c9ad-4dbc-b99d-25751c257ae1}</Project>
       <Name>ClayApplaication.DataAccess</Name>
     </ProjectReference>

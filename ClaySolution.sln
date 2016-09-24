@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClayApplication.WebUI", "WebApplication1\ClayApplication.WebUI.csproj", "{CEBB5441-0A2D-41BB-B56E-A6850041D866}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClayApplication.WebUI", "ClayApplication.WebUI\ClayApplication.WebUI.csproj", "{CEBB5441-0A2D-41BB-B56E-A6850041D866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClayApplaication.DataAccess", "DataAccess\ClayApplaication.DataAccess.csproj", "{64E509C2-C9AD-4DBC-B99D-25751C257AE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClayApplaication.DataAccess", "ClayApplication.DataAccess\ClayApplaication.DataAccess.csproj", "{64E509C2-C9AD-4DBC-B99D-25751C257AE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClayApplication.Domain", "ClayApplication.Domain\ClayApplication.Domain.csproj", "{03CC4E99-5ECE-4CCB-86D4-325FB0B2AB87}"
 EndProject

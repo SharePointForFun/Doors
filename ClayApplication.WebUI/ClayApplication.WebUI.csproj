@@ -264,7 +264,7 @@
       <Project>{2d285a6f-0679-461e-8e22-db2e733799ea}</Project>
       <Name>ClayApplication.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\ClayApplaication.DataAccess.csproj">
+    <ProjectReference Include="..\ClayApplication.DataAccess\ClayApplaication.DataAccess.csproj">
       <Project>{64e509c2-c9ad-4dbc-b99d-25751c257ae1}</Project>
       <Name>ClayApplaication.DataAccess</Name>
     </ProjectReference>
