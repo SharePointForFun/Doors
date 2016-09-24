@@ -1,0 +1,36 @@
+﻿@using System.Web.Mvc;
+@using ClayApplication.Service.ViewModel
+
+@model DoorAccessViewModel
+
+@{
+    ViewBag.Title = "ManageAccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Access</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.DoorId, new { name = "doorId" })
+    <div class="table floating-div">
+        <header class="floating-div">
+            <strong class="col-lg-2">User</strong>
+            <strong class="col-lg-2">Authorization</strong>
+        </header>
+        <div class="floating-div tab-content">
+            <div class="col-lg-2">
+                @Html.DropDownListFor(m => m.SelectedUserId,
+                new SelectList(Model.UsersForAccess, "Id", "LastName"), "-- Select --")
+            </div>
+            <div class="col-lg-2">
+                @Html.CheckBoxFor(m => m.Authorized)
+            </div>
+        </div>
+    </div>
+    <div class="form-group floating-div">
+        <div class="col-md-10">
+            <input type="submit" value="Add" class="btn btn-default" />
+        </div>
+    </div>
+}
+

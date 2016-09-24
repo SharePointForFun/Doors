@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNet.Identity
+@using ClayApplication.WebUI.Helpers
+@if (SessionHelper.CurrentUserViewModel != null)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <div class="navbar-text">
+                    <label>@(string.Format("{0} {1}", SessionHelper.CurrentUserViewModel.FirstName, SessionHelper.CurrentUserViewModel.LastName))</label>
+                </div>
+            </li>
+            <li>
+                @Html.ActionLink("Log out", "Authentication", "User")
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Log in", "Authentication", "User")</li>
+    </ul>
+}

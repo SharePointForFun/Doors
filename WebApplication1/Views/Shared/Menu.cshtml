@@ -1,0 +1,8 @@
+﻿@using ClayApplication.WebUI.Helpers
+@if (SessionHelper.CurrentUserViewModel != null)
+{
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("My Doors", "MyDoors", "User")</li>
+        <li>@Html.ActionLink("Access", "DoorsIHaveAccess", "User")</li>
+    </ul>
+}

@@ -1,0 +1,15 @@
+﻿@using System.Web.Mvc;
+@model ClayApplication.Service.ViewModel.UserViewModel
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <div>@Model.LastName</div>
+    <div>@Model.FirstName</div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using System.Web.Mvc;
+@model ClayApplication.Service.ViewModel.UserViewModel
+
+@{
+    ViewBag.Title = "DoorsIHaveAccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Access List</h2>
+<div class="table">
+    <header>
+        <strong class="col-lg-2">Name</strong>
+        <strong class="col-lg-2">Address</strong>
+        <strong class="col-lg-2">Owner</strong>
+        <strong class="col-lg-2">Status</strong>
+        <strong class="col-lg-2">Key</strong>
+    </header>
+    <div class="floating-div tab-content">
+        @foreach (var door in Model.DoorsHaveAccessTo)
+        {
+            <div class="floating-div">
+                <div class="col-lg-2">@door.Name</div>
+                <div class="col-lg-2">@door.Address</div>
+                <div class="col-lg-2">@(string.Format("{0} {1}", door.Owner.FirstName, door.Owner.LastName))</div>
+                <div class="col-lg-2">@(door.Locked ? "Locked" : "Unlocked")</div>
+                <div class="col-lg-2">@Html.ActionLink("Key", "Key", "Door", new { Id = door.Id }, null)</div>
+            </div>
+        }
+    </div>
+</div>

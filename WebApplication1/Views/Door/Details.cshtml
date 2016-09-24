@@ -1,0 +1,45 @@
+﻿@using System.Web.Mvc;
+
+@model ClayApplication.Service.ViewModel.DoorAccessViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Door Details</h2>
+<div>
+    <div>
+        <strong>Name: </strong><span>@Model.DoorName</span>
+    </div>
+    <div>
+        <strong>Address: </strong><span>@Model.DoorAddress</span>
+    </div>
+    <div>
+        <div class="page-header">
+            <strong>People with access</strong>
+        </div>
+        <div class="table floating-div">
+            <header class="floating-div">
+                <strong class="col-lg-2">Name</strong>
+                <strong class="col-lg-2">Authorization</strong>
+                <strong class="col-lg-2">Edit authorization</strong>
+            </header>
+            <div class="floating-div tab-content">
+                @foreach (var user in Model.AuthorizedUsers)
+                {
+                    <div class="floating-div">
+                        @Html.Hidden("userId", user.UserId)
+                        <div class="col-lg-2">@user.UserName</div>
+                        <div class="col-lg-2">@(user.Authorized ? "Yes" : "No")</div>
+                        <div class="col-lg-2">@Html.ActionLink("Edit", "EditAuthorisation", new { doorId = user.DoorId, userId = user.UserId })</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="icon-bar">
+        <div>@Html.ActionLink("Manage access", "ManageAccess", new { id = Model.DoorId })</div>
+    </div>
+</div>
+

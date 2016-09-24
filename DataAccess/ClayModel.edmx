@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClayDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Door">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ownerid" Type="int" />
+          <Property Name="locked" Type="bit" />
+        </EntityType>
+        <EntityType Name="DoorAccess">
+          <Key>
+            <PropertyRef Name="doorid" />
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="doorid" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="autherized" Type="bit" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoorAccessLog">
+          <Key>
+            <PropertyRef Name="doorid" />
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="doorid" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="state" Type="bit" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accessdenied" Type="bit" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Access_Door">
+          <End Role="Door" Type="Self.Door" Multiplicity="1" />
+          <End Role="DoorAccess" Type="Self.DoorAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Door">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccess">
+              <PropertyRef Name="doorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Access_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DoorAccess" Type="Self.DoorAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccess">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Door_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Door" Type="Self.Door" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Door">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoorAccessLog_Door">
+          <End Role="Door" Type="Self.Door" Multiplicity="1" />
+          <End Role="DoorAccessLog" Type="Self.DoorAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Door">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccessLog">
+              <PropertyRef Name="doorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoorAccessLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DoorAccessLog" Type="Self.DoorAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccessLog">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClayDbModelStoreContainer">
+          <EntitySet Name="Door" EntityType="Self.Door" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoorAccess" EntityType="Self.DoorAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoorAccessLog" EntityType="Self.DoorAccessLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Access_Door" Association="Self.FK_Access_Door">
+            <End Role="Door" EntitySet="Door" />
+            <End Role="DoorAccess" EntitySet="DoorAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Access_User" Association="Self.FK_Access_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DoorAccess" EntitySet="DoorAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Door_User" Association="Self.FK_Door_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Door" EntitySet="Door" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoorAccessLog_Door" Association="Self.FK_DoorAccessLog_Door">
+            <End Role="Door" EntitySet="Door" />
+            <End Role="DoorAccessLog" EntitySet="DoorAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoorAccessLog_User" Association="Self.FK_DoorAccessLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DoorAccessLog" EntitySet="DoorAccessLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClayDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Door">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ownerid" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Door_User" FromRole="Door" ToRole="User" />
+          <NavigationProperty Name="DoorAccess" Relationship="ClayDbModel.FK_Access_Door" FromRole="Door" ToRole="DoorAccess" />
+          <NavigationProperty Name="DoorAccessLog" Relationship="ClayDbModel.FK_DoorAccessLog_Door" FromRole="Door" ToRole="DoorAccessLog" />
+          <Property Name="locked" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Door" Relationship="Self.FK_Door_User" FromRole="User" ToRole="Door" />
+          <NavigationProperty Name="DoorAccess" Relationship="ClayDbModel.FK_Access_User" FromRole="User" ToRole="DoorAccess" />
+          <NavigationProperty Name="DoorAccessLog" Relationship="ClayDbModel.FK_DoorAccessLog_User" FromRole="User" ToRole="DoorAccessLog" />
+        </EntityType>
+        <Association Name="FK_Door_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Door" Type="Self.Door" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Door">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClayDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Door" EntityType="Self.Door" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Door_User" Association="Self.FK_Door_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Door" EntitySet="Door" />
+          </AssociationSet>
+          <EntitySet Name="DoorAccess" EntityType="ClayDbModel.DoorAccess" />
+          <EntitySet Name="DoorAccessLog" EntityType="ClayDbModel.DoorAccessLog" />
+          <AssociationSet Name="FK_Access_Door" Association="ClayDbModel.FK_Access_Door">
+            <End Role="Door" EntitySet="Door" />
+            <End Role="DoorAccess" EntitySet="DoorAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoorAccessLog_Door" Association="ClayDbModel.FK_DoorAccessLog_Door">
+            <End Role="Door" EntitySet="Door" />
+            <End Role="DoorAccessLog" EntitySet="DoorAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Access_User" Association="ClayDbModel.FK_Access_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DoorAccess" EntitySet="DoorAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoorAccessLog_User" Association="ClayDbModel.FK_DoorAccessLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DoorAccessLog" EntitySet="DoorAccessLog" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DoorAccess">
+          <Key>
+            <PropertyRef Name="doorid" />
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="doorid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="autherized" Type="Boolean" />
+          <NavigationProperty Name="Door" Relationship="ClayDbModel.FK_Access_Door" FromRole="DoorAccess" ToRole="Door" />
+          <NavigationProperty Name="User" Relationship="ClayDbModel.FK_Access_User" FromRole="DoorAccess" ToRole="User" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DoorAccessLog">
+          <Key>
+            <PropertyRef Name="doorid" />
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="doorid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="Boolean" />
+          <NavigationProperty Name="Door" Relationship="ClayDbModel.FK_DoorAccessLog_Door" FromRole="DoorAccessLog" ToRole="Door" />
+          <NavigationProperty Name="User" Relationship="ClayDbModel.FK_DoorAccessLog_User" FromRole="DoorAccessLog" ToRole="User" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accessdenied" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Access_Door">
+          <End Type="ClayDbModel.Door" Role="Door" Multiplicity="1" />
+          <End Type="ClayDbModel.DoorAccess" Role="DoorAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Door">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccess">
+              <PropertyRef Name="doorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoorAccessLog_Door">
+          <End Type="ClayDbModel.Door" Role="Door" Multiplicity="1" />
+          <End Type="ClayDbModel.DoorAccessLog" Role="DoorAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Door">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccessLog">
+              <PropertyRef Name="doorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Access_User">
+          <End Type="ClayDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="ClayDbModel.DoorAccess" Role="DoorAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccess">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoorAccessLog_User">
+          <End Type="ClayDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="ClayDbModel.DoorAccessLog" Role="DoorAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DoorAccessLog">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClayDbModelStoreContainer" CdmEntityContainer="ClayDbEntities">
+          <EntitySetMapping Name="Door">
+            <EntityTypeMapping TypeName="ClayDbModel.Door">
+              <MappingFragment StoreEntitySet="Door">
+                <ScalarProperty Name="locked" ColumnName="locked" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ownerid" ColumnName="ownerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ClayDbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoorAccess">
+            <EntityTypeMapping TypeName="ClayDbModel.DoorAccess">
+              <MappingFragment StoreEntitySet="DoorAccess">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="autherized" ColumnName="autherized" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="doorid" ColumnName="doorid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoorAccessLog">
+            <EntityTypeMapping TypeName="ClayDbModel.DoorAccessLog">
+              <MappingFragment StoreEntitySet="DoorAccessLog">
+                <ScalarProperty Name="accessdenied" ColumnName="accessdenied" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="doorid" ColumnName="doorid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

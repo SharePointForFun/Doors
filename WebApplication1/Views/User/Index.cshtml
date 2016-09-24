@@ -1,0 +1,11 @@
+﻿@using System.Web.Mvc;
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Home</h2>
+@Ajax.ActionLink("Go to details", "Details", new { id = 1 }, new AjaxOptions { HttpMethod = "POST" })
+<div>
+</div>

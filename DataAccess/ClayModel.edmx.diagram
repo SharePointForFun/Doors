@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfdd9abace194bd7bb857f988c111f9b" Name="Diagram1">
+        <EntityTypeShape EntityType="ClayDbModel.Door" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClayDbModel.User" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="ClayDbModel.FK_Door_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClayDbModel.DoorAccess" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="ClayDbModel.DoorAccessLog" Width="1.5" PointX="3.75" PointY="3.625" />
+        <AssociationConnector Association="ClayDbModel.FK_Access_Door" />
+        <AssociationConnector Association="ClayDbModel.FK_DoorAccessLog_Door" />
+        <AssociationConnector Association="ClayDbModel.FK_Access_User" />
+        <AssociationConnector Association="ClayDbModel.FK_DoorAccessLog_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

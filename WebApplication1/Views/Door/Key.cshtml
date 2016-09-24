@@ -1,0 +1,38 @@
+﻿@using System.Web.Mvc;
+@using ClayApplication.WebUI.Helpers
+
+@model ClayApplication.Service.ViewModel.DoorViewModel
+
+@{
+    ViewBag.Title = "Key";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Key</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        <div>
+            <div>@Html.DisplayTextFor(m => m.Name)</div>
+            <div>@Html.DisplayTextFor(m => m.Address)</div>
+            <div>@(Model.Locked ? "The door is locked" : "The door is unlocked")</div>
+            <div class="hidden">
+                @*@Html.CheckBoxFor(m => m.Locked)*@
+                @Html.TextBoxFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Owner)
+                @Html.TextBoxFor(m => m.Id)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@(Model.Locked ? "Unlock" : "Lock")" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @(SessionHelper.CurrentUserViewModel != null 
+    ? Html.ActionLink("Go back to doors", "DoorsIHaveAccess", "User")
+    : Html.Display(""))
+</div>
