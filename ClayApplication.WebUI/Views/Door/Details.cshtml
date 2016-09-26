@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc;
+@using ClayApplication.Service.ViewModel
 
 @model ClayApplication.Service.ViewModel.DoorAccessViewModel
 
@@ -10,10 +11,10 @@
 <h2>Door Details</h2>
 <div>
     <div>
-        <strong>Name: </strong><span>@Model.DoorName</span>
+        <strong>Name: </strong><span>@Model.Door.Name</span>
     </div>
     <div>
-        <strong>Address: </strong><span>@Model.DoorAddress</span>
+        <strong>Address: </strong><span>@Model.Door.Address</span>
     </div>
     <div>
         <div class="page-header">
@@ -29,17 +30,18 @@
                 @foreach (var user in Model.AuthorizedUsers)
                 {
                     <div class="floating-div">
-                        @Html.Hidden("userId", user.UserId)
-                        <div class="col-lg-2">@user.UserName</div>
-                        <div class="col-lg-2">@(user.Authorized ? "Yes" : "No")</div>
-                        <div class="col-lg-2">@Html.ActionLink("Edit", "EditAuthorisation", new { doorId = user.DoorId, userId = user.UserId })</div>
+                        @Html.Hidden("userId", user.User.Id)
+                        <div class="col-lg-2">@string.Format("{0} {1}", user.User.FirstName, user.User.LastName)</div>
+                        <div class="col-lg-2">@(user.IsAuthorized ? "Yes" : "No")</div>
+                        <div class="col-lg-2">@Html.ActionLink("Edit", "EditAuthorisation", "DoorAccess",
+                                                new { doorId = Model.Door.Id, userId = user.User.Id }, null)</div>
                     </div>
                 }
             </div>
         </div>
     </div>
     <div class="icon-bar">
-        <div>@Html.ActionLink("Manage access", "ManageAccess", new { id = Model.DoorId })</div>
+        <div>@Html.ActionLink("Manage access", "AddAccess", new { id = Model.Door.Id })</div>
     </div>
 </div>
 

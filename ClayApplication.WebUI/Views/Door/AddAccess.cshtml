@@ -1,7 +1,7 @@
 ﻿@using System.Web.Mvc;
 @using ClayApplication.Service.ViewModel
 
-@model DoorAccessViewModel
+@model DoorAccessForEditViewModel
 
 @{
     ViewBag.Title = "ManageAccess";
@@ -11,7 +11,7 @@
 <h2>Manage Access</h2>
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(m => m.DoorId, new { name = "doorId" })
+    @Html.HiddenFor(m => m.Door.Id, new { name = "doorId" })
     <div class="table floating-div">
         <header class="floating-div">
             <strong class="col-lg-2">User</strong>
@@ -20,10 +20,10 @@
         <div class="floating-div tab-content">
             <div class="col-lg-2">
                 @Html.DropDownListFor(m => m.SelectedUserId,
-                new SelectList(Model.UsersForAccess, "Id", "LastName"), "-- Select --")
+         new SelectList(Model.UsersListSelection, "Id", "LastName"), "-- Select --")
             </div>
             <div class="col-lg-2">
-                @Html.CheckBoxFor(m => m.Authorized)
+                @Html.CheckBoxFor(m => m.IsSelectedUserAuthorized)
             </div>
         </div>
     </div>

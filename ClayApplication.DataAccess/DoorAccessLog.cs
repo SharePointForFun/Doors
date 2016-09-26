@@ -11,8 +11,8 @@ namespace ClayApplication.DataAccess
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class DoorAccessLog
+
+    public partial class DoorAccessLog : Entity
     {
         public int doorid { get; set; }
         public int userid { get; set; }

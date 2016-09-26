@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\packages\valueinjecter.3.1.1.3\lib\net40\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,10 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoorAccessService.cs" />
+    <Compile Include="DoorService.cs" />
+    <Compile Include="Extension\ExtensionHelper.cs" />
+    <Compile Include="IDoorAccessService.cs" />
+    <Compile Include="IDoorService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="ViewModel\DoorAccessLogViewModel.cs" />
+    <Compile Include="ViewModel\DoorAccessViewModel.cs" />
     <Compile Include="ViewModel\DoorViewModel.cs" />
     <Compile Include="ViewModel\ErrorMessage.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
@@ -56,6 +65,9 @@
       <Project>{64e509c2-c9ad-4dbc-b99d-25751c257ae1}</Project>
       <Name>ClayApplaication.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

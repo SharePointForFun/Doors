@@ -1,14 +1,9 @@
 ﻿using ClayApplication.DataAccess;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClayApplication.Domain.Abstract
 {
-    public interface IDoorRepostory
+    public interface IDoorRepository
     {
         void Create(string address, string name, int ownerId);
         Door Get(int id);

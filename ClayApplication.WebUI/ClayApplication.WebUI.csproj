@@ -176,7 +176,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DoorAccessController.cs" />
     <Compile Include="Controllers\DoorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,13 +235,13 @@
     <Content Include="Views\User\AddNewDoor.cshtml" />
     <Content Include="Views\Door\Create.cshtml" />
     <Content Include="Views\Door\Details.cshtml" />
-    <Content Include="Views\Door\ManageAccess.cshtml" />
+    <Content Include="Views\Door\AddAccess.cshtml" />
     <Content Include="Views\Door\ViewLogs.cshtml" />
     <Content Include="Views\Door\Key.cshtml" />
-    <Content Include="Views\Door\ErrorPage.cshtml" />
-    <Content Include="Views\Door\EditAuthorisation.cshtml" />
+    <Content Include="Views\Error\ErrorPage.cshtml" />
     <Content Include="Views\User\Authentication.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\DoorAccess\EditAuthorisation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

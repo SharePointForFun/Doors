@@ -2,11 +2,11 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
-using System.Collections.Generic;
-using System.Linq;
-using System.Configuration;
 using ClayApplication.Domain.Concrete;
 using ClayApplication.Domain.Abstract;
+using ClayApplication.Service;
+using ClayApplication.DataAccess;
+
 
 namespace SportsStore.WebUI.Infrastructure
 {
@@ -32,8 +32,15 @@ namespace SportsStore.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            ninjectKernel.Bind<IDoorRepostory>().To<DoorRepository>();
+            ninjectKernel.Bind<IDoorRepository>().To<DoorRepository>();
             ninjectKernel.Bind<IUserRepository>().To<UserRepository>();
+            ninjectKernel.Bind<IDoorService>().To<DoorService>();
+            ninjectKernel.Bind<IDoorAccessService>().To<DoorAccessService>();
+            ninjectKernel.Bind<IDbContextFactory>().To<DbContextFactory>();
+            ninjectKernel.Bind<IRepo<Door>>().To<Repo<Door>>();
+            ninjectKernel.Bind<IRepo<User>>().To<Repo<User>>();
+            ninjectKernel.Bind<IRepo<DoorAccess>>().To<Repo<DoorAccess>>();
+            ninjectKernel.Bind<IRepo<DoorAccessLog>>().To<Repo<DoorAccessLog>>();
         }
     }
 }

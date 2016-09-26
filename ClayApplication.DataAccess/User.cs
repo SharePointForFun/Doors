@@ -12,7 +12,7 @@ namespace ClayApplication.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class User: Entity
     {
         public User()
         {

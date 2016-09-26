@@ -11,8 +11,8 @@ namespace ClayApplication.DataAccess
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Door
+
+    public partial class Door : Entity
     {
         public Door()
         {

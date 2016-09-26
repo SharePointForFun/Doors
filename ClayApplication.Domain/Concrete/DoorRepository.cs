@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using ClayApplication.DataAccess;
 using ClayApplication.Domain.Abstract;
 
 namespace ClayApplication.Domain.Concrete
 {
-    public class DoorRepository : IDoorRepostory, IDisposable
+    public class DoorRepository : IDoorRepository, IDisposable
     {
         private ClayDbEntities clayEntities;
 
@@ -76,8 +75,8 @@ namespace ClayApplication.Domain.Concrete
                 doorAccessLog.state = locked;
                 doorAccessLog.date = DateTime.Now;
                 doorAccessLog.accessdenied = accessDenied;
-                doorObject.DoorAccessLog.Add(doorAccessLog);
-                userObject.DoorAccessLog.Add(doorAccessLog);
+                doorAccessLog.Door = doorObject;
+                doorAccessLog.User = userObject;
                 clayEntities.SaveChanges();
             }
             catch (Exception ex)

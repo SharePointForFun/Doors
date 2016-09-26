@@ -36,6 +36,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\packages\ValueInjecter.3.1.1.3\lib\net40\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -46,10 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstarct\IDoorRepostory.cs" />
-    <Compile Include="Abstarct\IUserRepository.cs" />
+    <Compile Include="Abstract\IDbContextFactory.cs" />
+    <Compile Include="Abstract\IDoorRepository.cs" />
+    <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\DbContextFactory.cs" />
     <Compile Include="Concrete\DoorRepository.cs" />
+    <Compile Include="Concrete\Repo.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
+    <Compile Include="Abstract\IRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

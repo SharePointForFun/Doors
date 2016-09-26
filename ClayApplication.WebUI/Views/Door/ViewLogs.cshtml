@@ -19,7 +19,7 @@
         @foreach (var log in Model)
         {
             <div class="floating-div">
-                <div class="col-lg-3">@log.UserName</div>
+                <div class="col-lg-3">@string.Format("{0} {1}", log.User.FirstName, log.User.LastName)</div>
                 <div class="col-lg-3">@log.Date</div>
                 <div class="col-lg-3">@(log.Status ? "Locked" : "Unlocked")</div>
                 <div class="col-lg-3">@(log.AccessDenied ? "Denied" : "Accepted")</div>
