@@ -12,7 +12,7 @@ namespace ClayApplication.Service.ViewModel
         public string LastName { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public List<DoorViewModel> DoorsHaveAccessTo { get; set; }
-        public List<DoorViewModel> DoorsOwns { get; set; }
+        public List<DoorViewModel> DoorsIAccess { get; set; }
+        public List<DoorViewModel> MyDoors { get; set; }
     }
 }

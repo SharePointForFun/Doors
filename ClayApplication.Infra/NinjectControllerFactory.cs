@@ -32,9 +32,8 @@ namespace SportsStore.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            ninjectKernel.Bind<IDoorRepository>().To<DoorRepository>();
-            ninjectKernel.Bind<IUserRepository>().To<UserRepository>();
             ninjectKernel.Bind<IDoorService>().To<DoorService>();
+            ninjectKernel.Bind<IUserService>().To<UserService>();
             ninjectKernel.Bind<IDoorAccessService>().To<DoorAccessService>();
             ninjectKernel.Bind<IDbContextFactory>().To<DbContextFactory>();
             ninjectKernel.Bind<IRepo<Door>>().To<Repo<Door>>();

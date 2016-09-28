@@ -11,5 +11,9 @@ namespace ClayApplication.Service
     {
         UserViewModel GetUser(int id);
         UserViewModel GetUser(string login, string pwd);
+        IEnumerable<DoorViewModel> GetAllDoorsByUserId(int userId);
+        bool DoesUserExist(string login, string pwd);
+        ICollection<UserViewModel> GetAll();
+        IEnumerable<DoorViewModel> DoorsUserHasAccess(int id);
     }
 }

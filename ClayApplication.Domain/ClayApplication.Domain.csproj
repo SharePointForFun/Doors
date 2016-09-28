@@ -50,12 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDbContextFactory.cs" />
-    <Compile Include="Abstract\IDoorRepository.cs" />
-    <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\DbContextFactory.cs" />
-    <Compile Include="Concrete\DoorRepository.cs" />
     <Compile Include="Concrete\Repo.cs" />
-    <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Abstract\IRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

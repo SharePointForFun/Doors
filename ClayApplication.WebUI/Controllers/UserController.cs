@@ -6,16 +6,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ClayApplication.Service.ViewModel;
+using ClayApplication.Service;
 
 namespace ClayApplication.WebUI.Controllers
 {
     public class UserController : Controller
     {
-        private IUserRepository userRepository;
+        private IUserService userService;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserService userService)
         {
-            this.userRepository = userRepository;
+            this.userService = userService;
         }
 
         // GET: User
@@ -27,13 +28,7 @@ namespace ClayApplication.WebUI.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            var user = this.userRepository.Get(id);
-            var userViewModel = new UserViewModel()
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            };
-
+            var userViewModel = this.userService.GetUser(id);
             return View(userViewModel);
         }
 
@@ -50,13 +45,10 @@ namespace ClayApplication.WebUI.Controllers
                 && !string.IsNullOrEmpty(userViewModel.Login)
                 && !string.IsNullOrEmpty(userViewModel.Password))
             {
-                if (userRepository.DoesUserExist(userViewModel.Login, userViewModel.Password))
+                if (userService.DoesUserExist(userViewModel.Login, userViewModel.Password))
                 {
-                    var userObject = userRepository.Get(userViewModel.Login, userViewModel.Password);
-                    userViewModel.FirstName = userObject.FirstName;
-                    userViewModel.LastName = userObject.LastName;
-                    userViewModel.Id = userObject.id;
-                    SessionHelper.CurrentUserViewModel = userViewModel;
+                    var userObject = userService.GetUser(userViewModel.Login, userViewModel.Password);
+                    SessionHelper.CurrentUserViewModel = userObject;
                     return RedirectToAction("MyDoors");
                 }
                 else
@@ -73,40 +65,10 @@ namespace ClayApplication.WebUI.Controllers
             if (SessionHelper.CurrentUserViewModel != null)
             {
                 var userViewModel = SessionHelper.CurrentUserViewModel;
-                var user = this.userRepository.Get(userViewModel.Id);
-                userViewModel.DoorsHaveAccessTo = new List<DoorViewModel>();
-                foreach (var doorAccess in user.DoorAccess)
-                {
-                    userViewModel.DoorsHaveAccessTo.Add(new DoorViewModel()
-                    {
-                        Id = doorAccess.Door.id,
-                        Name = doorAccess.Door.name,
-                        Address = doorAccess.Door.address,
-                        Owner = new UserViewModel()
-                        {
-                            FirstName = doorAccess.Door.User.FirstName,
-                            LastName = doorAccess.Door.User.LastName
-                        },
-                        Locked = doorAccess.Door.locked ?? true
-                    });
-                }
-
-                foreach (var myDoor in user.Door)
-                {
-                    userViewModel.DoorsHaveAccessTo.Add(new DoorViewModel()
-                    {
-                        Id = myDoor.id,
-                        Name = myDoor.name,
-                        Address = myDoor.address,
-                        Owner = new UserViewModel()
-                        {
-                            FirstName = user.FirstName,
-                            LastName = user.LastName
-                        },
-                        Locked = myDoor.locked ?? true
-                    });
-                }
-
+                var otherDoors = userService.DoorsUserHasAccess(userViewModel.Id);
+                var myDoors = userService.GetAllDoorsByUserId(userViewModel.Id);
+                userViewModel.DoorsIAccess = new List<DoorViewModel>();
+                userViewModel.DoorsIAccess = otherDoors.Concat(myDoors).ToList();
                 return View(userViewModel);
             }
             else
@@ -120,19 +82,7 @@ namespace ClayApplication.WebUI.Controllers
             if (SessionHelper.CurrentUserViewModel != null)
             {
                 var userViewModel = SessionHelper.CurrentUserViewModel;
-                var user = this.userRepository.Get(userViewModel.Id);
-                userViewModel.DoorsOwns = new List<DoorViewModel>();
-                foreach (var door in user.Door)
-                {
-                    userViewModel.DoorsOwns.Add(new DoorViewModel()
-                    {
-                        Id = door.id,
-                        Locked = door.locked ?? true,
-                        Name = door.name,
-                        Address = door.address
-                    });
-                }
-
+                userViewModel.MyDoors = userService.GetAllDoorsByUserId(userViewModel.Id).ToList();
                 return View(userViewModel);
             }
             else

@@ -12,41 +12,44 @@ namespace ClayApplication.Service.Extension
     {
         public static UserViewModel GetViewModel(this User userObject)
         {
-            var userViewModel = new UserViewModel()
+            var userViewModel = new UserViewModel();
+            if (userObject != null)
             {
-                Id = userObject.id,
-                FirstName = userObject.FirstName,
-                LastName = userObject.LastName,
-                Login = userObject.login,
-                Password = userObject.pwd
-            };
+                userViewModel.Id = userObject.id;
+                userViewModel.FirstName = userObject.FirstName;
+                userViewModel.LastName = userObject.LastName;
+                userViewModel.Login = userObject.login;
+                userViewModel.Password = userObject.pwd;
+            }
 
             return userViewModel;
         }
 
         public static DoorViewModel GetViewModel(this Door doorObject)
         {
-            var doorViewModel = new DoorViewModel()
+            var doorViewModel = new DoorViewModel();
+            if (doorObject != null)
             {
-                Id = doorObject.id,
-                Address = doorObject.address,
-                Name = doorObject.name,
-                Owner = doorObject.User.GetViewModel()
-            };
+                doorViewModel.Id = doorObject.id;
+                doorViewModel.Address = doorObject.address;
+                doorViewModel.Name = doorObject.name;
+                doorViewModel.Owner = doorObject.User.GetViewModel();
+            }
 
             return doorViewModel;
         }
 
         public static DoorAccessLogViewModel GetViewModel(this DoorAccessLog doorAccessLogObject)
         {
-            var doorAccessLogViewModel = new DoorAccessLogViewModel()
+            var doorAccessLogViewModel = new DoorAccessLogViewModel();
+            if(doorAccessLogObject != null)
             {
-                AccessDenied = doorAccessLogObject.accessdenied ?? true,
-                Date = doorAccessLogObject.date ?? DateTime.Now,
-                Door = doorAccessLogObject.Door.GetViewModel(),
-                User = doorAccessLogObject.User.GetViewModel(),
-                Status = doorAccessLogObject.state ?? true
-            };
+                doorAccessLogViewModel.AccessDenied = doorAccessLogObject.accessdenied ?? true;
+                doorAccessLogViewModel.Date = doorAccessLogObject.date ?? DateTime.Now;
+                doorAccessLogViewModel.Door = doorAccessLogObject.Door.GetViewModel();
+                doorAccessLogViewModel.User = doorAccessLogObject.User.GetViewModel();
+                doorAccessLogViewModel.Status = doorAccessLogObject.state ?? true;
+            }
 
             return doorAccessLogViewModel;
         }

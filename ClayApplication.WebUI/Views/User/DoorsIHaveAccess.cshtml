@@ -16,7 +16,7 @@
         <strong class="col-lg-2">Key</strong>
     </header>
     <div class="floating-div tab-content">
-        @foreach (var door in Model.DoorsHaveAccessTo)
+        @foreach (var door in Model.DoorsIAccess)
         {
             <div class="floating-div">
                 <div class="col-lg-2">@door.Name</div>
