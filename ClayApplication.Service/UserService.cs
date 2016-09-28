@@ -11,10 +11,10 @@ namespace ClayApplication.Service
 {
     public class UserService: IUserService
     {
-        private readonly IUserRepository userRepository;
-        public UserService(IUserRepository repo)
+        private readonly IRepo<User> repo;
+        public UserService(IRepo<User> repo)
         {
-            userRepository = repo;  
+            this.repo = repo;  
         }
 
         private UserViewModel ConvertToViewModel(User user)
@@ -32,13 +32,13 @@ namespace ClayApplication.Service
 
         public UserViewModel GetUser(string login, string pwd)
         {
-            var user = userRepository.Where(x => x.login.Equals(login) && x.pwd.Equals(pwd));
+            var user = repo.Where(x => x.login.Equals(login) && x.pwd.Equals(pwd));
             return ConvertToViewModel(user as User);
         }
 
         public UserViewModel GetUser(int id)
         {
-            var user = userRepository.Get(id);
+            var user = repo.Get(id);
             return ConvertToViewModel(user);
         }
     }

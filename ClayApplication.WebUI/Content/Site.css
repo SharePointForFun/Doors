@@ -3,10 +3,59 @@
     padding-bottom: 20px;
 }
 
+div.page {
+    width: 75%;
+    background-color: #fff;
+    margin: 0px auto 0px auto;
+}
+
+
+div.page > header {
+    text-align:center;
+    float:left;
+    border-bottom: 1px solid #008ac9;
+    padding-top:0.5em;
+    position: fixed;
+    z-index: 1000;
+    background-color: white;
+}
+
+div.page > header > div {
+    margin:auto;
+    width:90%;
+    text-align:left;
+}
+
+div.page > header a {
+    text-decoration: none;
+    color:#008ac9 ;
+}
+
+div.main {
+    float:left;
+    width:100%;
+    padding: 0px 12px;
+    margin-top: 5.5em;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.main > div {
+    margin:0 auto;
+    width:90%;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+div.home-intro {
+    margin-top: 5%;
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console';
+    font-size: 1.5em;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
