@@ -42,14 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoorAccessService.cs" />
-    <Compile Include="DoorService.cs" />
+    <Compile Include="ConcreteServices\DoorAccessService.cs" />
+    <Compile Include="ConcreteServices\DoorService.cs" />
     <Compile Include="Extension\ExtensionHelper.cs" />
-    <Compile Include="IDoorAccessService.cs" />
-    <Compile Include="IDoorService.cs" />
-    <Compile Include="IUserService.cs" />
+    <Compile Include="AbstractServices\IDoorAccessService.cs" />
+    <Compile Include="AbstractServices\IDoorService.cs" />
+    <Compile Include="AbstractServices\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserService.cs" />
+    <Compile Include="ConcreteServices\UserService.cs" />
     <Compile Include="ViewModel\DoorAccessLogViewModel.cs" />
     <Compile Include="ViewModel\DoorAccessViewModel.cs" />
     <Compile Include="ViewModel\DoorViewModel.cs" />
